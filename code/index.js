@@ -71,14 +71,21 @@ function getName(){
         replayGame()
     }
     else {
-        playername = prompt("Enter name of player1")
-        playername2 = prompt("Enter name of player2")
-        confirm("Game controls: " + playername + " should press F key and " + playername2 +" J key to give upward velocity to respective balls.")
-        if (localStorage.length == 0) {
-            localStorage.setItem(playername, 0)
+        if (window.innerWidth < 600) {
+            alert("Dual player mode is available only for PC, with a keyboard for controls.")
+            backToHome()
         }
-        highScore = localStorage[localStorage.key(0)]
-        replayGame2()
+        else{
+            playername = prompt("Enter name of player1")
+            playername2 = prompt("Enter name of player2")
+            confirm("Game controls: " + playername + " should press F key and " + playername2 + " J key to give upward velocity to respective balls.")
+            if (localStorage.length == 0) {
+                localStorage.setItem(playername, 0)
+            }
+            highScore = localStorage[localStorage.key(0)]
+            replayGame2()
+        }
+        
     }
 
     hideHigh()
@@ -125,6 +132,16 @@ window.addEventListener('keyup', e => {
             }
         }
     }    
+    
+
+    else if (e.code == "Space" && canv.style.display == "block") {    
+        click.play()
+        ball.dy -= 5
+        if (ball.y >= canv.height - ball.radius - 1) {
+            ball.y = canv.height - ball.radius - 2
+        }
+    }
+    console.log(e)
 })
 
 canv.addEventListener('click', e=>{
@@ -652,6 +669,7 @@ function playGame(){
 }
 
 function replayGame(){
+    hideHigh()
     gamePlayState = true
     gameEnded = false
     beep.play()
@@ -842,7 +860,7 @@ about.addEventListener("click", showAbout)
 function showAbout() {
     aud.play()
     htitle.textContent = "About"
-    hmsg.innerHTML = "This is a game made as a task for the Inductions of Delta Club of NITT.<br/>Made by Ankit Rawani <br/>GitHub ID : <a href='https://github.com/ankit-rawani'><b>ankit-rawani</b></a>"
+    hmsg.innerHTML = "This is a game made as a task for the Inductions of Delta Club of NITT.<br/><br/>For better experience, play on PC.<br/><br/>Made by Ankit Rawani <br/>GitHub ID : <a href='https://github.com/ankit-rawani'><b>ankit-rawani</b></a>"
     msg.appendChild(htitle)
     msg.appendChild(hmsg)
     blackout.style.display = "block"
