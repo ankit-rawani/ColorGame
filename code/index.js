@@ -824,7 +824,7 @@ high.addEventListener("click", showHigh)
 crossHigh.addEventListener("click", hideHigh)
 
 var hmsg = document.createElement('p')
-hmsg.style.fontSize = "3vw"
+hmsg.style.fontSize = "2vw"
 hmsg.style.textAlign = "center"
 
 var htitle = document.createElement('div')
